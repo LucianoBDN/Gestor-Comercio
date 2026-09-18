@@ -1,0 +1,28 @@
+# Maven
+target/
+
+# Credenciales locales de la base de datos (usar db.properties.example como plantilla)
+db.properties
+
+# Documentación de trabajo con el asistente (no forma parte del código del proyecto)
+CLAUDE.md
+sprint1.md
+
+# Archivo de classpath generado por el IDE/Maven
+classpath.txt
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+nbproject/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

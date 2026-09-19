@@ -41,14 +41,26 @@ public class Main extends Application {
 
         tareaConexion.setOnFailed(event -> {
             Throwable error = tareaConexion.getException();
-            new Alert(Alert.AlertType.ERROR,
-                    "No se pudo conectar a la base de datos: " + error.getMessage())
-                    .showAndWait();
+            String mensaje = esErrorDeConexion(error)
+                    ? "No se pudo conectar a la base de datos. Verificá que PostgreSQL esté corriendo."
+                    : "Error al conectar a la base de datos: " + error.getMessage();
+            new Alert(Alert.AlertType.ERROR, mensaje).showAndWait();
         });
 
         Thread hilo = new Thread(tareaConexion);
         hilo.setDaemon(true);
         hilo.start();
+    }
+
+    private boolean esErrorDeConexion(Throwable error) {
+        Throwable actual = error;
+        while (actual != null) {
+            if (actual instanceof java.net.ConnectException) {
+                return true;
+            }
+            actual = actual.getCause();
+        }
+        return false;
     }
 
     @Override

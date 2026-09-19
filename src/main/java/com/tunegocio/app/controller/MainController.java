@@ -15,18 +15,18 @@ public class MainController {
 
     @FXML
     private void onIngresosClick() {
-        cargarVista("/fxml/IngresosView.fxml");
+        loadView("/fxml/IngresosView.fxml");
     }
 
     @FXML
     private void onEgresosClick() {
-        cargarVista("/fxml/EgresosView.fxml");
+        loadView("/fxml/EgresosView.fxml");
     }
 
-    private void cargarVista(String rutaFxml) {
+    private void loadView(String fxmlPath) {
         try {
-            Parent vista = FXMLLoader.load(getClass().getResource(rutaFxml));
-            contentArea.getChildren().setAll(vista);
+            Parent view = FXMLLoader.load(getClass().getResource(fxmlPath));
+            contentArea.getChildren().setAll(view);
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, "No se pudo cargar la pantalla: " + e.getMessage()).showAndWait();
         }

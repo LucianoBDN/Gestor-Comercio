@@ -24,10 +24,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        verificarConexionABase();
+        verifyDatabaseConnection();
     }
 
-    private void verificarConexionABase() {
+    private void verifyDatabaseConnection() {
         Task<Void> tareaConexion = new Task<>() {
             @Override
             protected Void call() {
@@ -41,7 +41,7 @@ public class Main extends Application {
 
         tareaConexion.setOnFailed(event -> {
             Throwable error = tareaConexion.getException();
-            String mensaje = esErrorDeConexion(error)
+            String mensaje = isConnectionError(error)
                     ? "No se pudo conectar a la base de datos. Verificá que PostgreSQL esté corriendo."
                     : "Error al conectar a la base de datos: " + error.getMessage();
             new Alert(Alert.AlertType.ERROR, mensaje).showAndWait();
@@ -52,7 +52,7 @@ public class Main extends Application {
         hilo.start();
     }
 
-    private boolean esErrorDeConexion(Throwable error) {
+    private boolean isConnectionError(Throwable error) {
         Throwable actual = error;
         while (actual != null) {
             if (actual instanceof java.net.ConnectException) {

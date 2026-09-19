@@ -9,12 +9,12 @@ import org.junit.Test;
 public class PersistenceConfigTest {
 
     @Test
-    public void deberiaCrearElEntityManagerFactory() {
+    public void shouldCreateEntityManagerFactory() {
         assertNotNull(PersistenceConfig.getEntityManagerFactory());
     }
 
-    @Test 
-    public void deberiaDevolverSiempreLaMismaInstancia(){
+    @Test
+    public void shouldAlwaysReturnTheSameInstance(){
         EntityManagerFactory primera = PersistenceConfig.getEntityManagerFactory();
         EntityManagerFactory segunda = PersistenceConfig.getEntityManagerFactory();
 
